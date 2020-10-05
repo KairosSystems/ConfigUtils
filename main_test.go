@@ -21,6 +21,14 @@ func TestReadConfigNotExistsFile(t *testing.T) {
 	}
 }
 
+func TestReadBadJsonConfig(t *testing.T) {
+	cfg := &ConfigTest{}
+	err := ConfigUtils.ReadConfig(&cfg, "bad_config_test.json")
+	if err == nil {
+		t.Error("The file must be malformed")
+	}
+}
+
 func TestReadConfigExistsFile(t *testing.T) {
 	cfg := &ConfigTest{}
 	err := ConfigUtils.ReadConfig(&cfg, "config_test.json")
@@ -38,7 +46,14 @@ func TestWriteConfig(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	t.Log(cfg.Name)
+}
+
+func TestWritableConfig(t *testing.T) {
+	cfg := &ConfigTest{Name: "Testing"}
+	err := ConfigUtils.WriteConfig(&cfg, "unwritable_config_test.json")
+	if err == nil {
+		t.Error("The file must be unwritable")
+	}
 }
 
 func TestAppKeyGen(t *testing.T) {

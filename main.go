@@ -38,9 +38,9 @@ func AppKeyGen() string{
 }
 
 func FileExists(filename string) bool {
-	info, err := os.Stat(filename)
-	if os.IsNotExist(err) {
-		return false
+	_, err := os.Stat(filename)
+	if err == nil {
+		return true
 	}
-	return !info.IsDir()
+	return false
 }
