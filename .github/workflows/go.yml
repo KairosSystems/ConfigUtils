@@ -13,7 +13,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
         goVer: [1.12, 1.13, 1.14, 1.15]
 
     steps:
@@ -26,6 +26,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Change Permissions
+      shell: bash
       run: chmod 400 unwritable_config_test.json
     
     - name: Get Dependencies
