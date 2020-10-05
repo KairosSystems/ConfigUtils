@@ -29,6 +29,7 @@ jobs:
             curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
             dep ensure
         fi
+        chown 400 unwritable_config_file.json
 
     - name: Build
       run: go build -v .
