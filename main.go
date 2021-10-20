@@ -7,12 +7,15 @@ import (
 	"io/ioutil"
 	"math/rand"
 	"os"
+
+	"github.com/tinode/jsonco"
 )
 
 func ReadConfig(c interface{}, filename string) error {
 	if FileExists(filename) {
-		file, _ := ioutil.ReadFile(filename)
-		err := json.Unmarshal(file, &c)
+		file, _ := os.Open(filename)
+		jr := jsonco.New(file)
+		err := json.NewDecoder(jr).Decode(&c)
 		if err!=nil {
 			return err
 		}
