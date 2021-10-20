@@ -1,4 +1,10 @@
 {
   // With comments here
+  /* Multiline
+  * Comment
+  * here
+  * for
+  * testing
+  */
   "name": "Testing" // We can add comments here too
 }
